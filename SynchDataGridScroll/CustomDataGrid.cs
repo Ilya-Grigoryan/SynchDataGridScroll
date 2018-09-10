@@ -35,16 +35,6 @@ namespace SynchDataGridScroll
         {
             base.OnApplyTemplate();
             ScrollViewer = VisualTreeHelperEx.FindChild<ScrollViewer>(this);
-            ScrollViewer.ScrollChanged -= OnScrollChanged;
-            ScrollViewer.ScrollChanged += OnScrollChanged;
-        }
-
-        private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            if(Math.Abs(e.VerticalChange) > 0.001 && (Math.Abs(VerticalScrollValue - e.VerticalOffset) > 0.001))
-            {
-                VerticalScrollValue = e.VerticalOffset;
-            }
         }
     }
 }
