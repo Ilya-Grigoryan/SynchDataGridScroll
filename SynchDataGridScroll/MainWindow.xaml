@@ -1,0 +1,32 @@
+﻿<Window x:Class="SynchDataGridScroll.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:synchDataGridScroll="clr-namespace:SynchDataGridScroll"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <synchDataGridScroll:GetMaxValueConverter x:Key="GetMaxValueConverter"/>
+    </Window.Resources>
+    <Grid Name="Test" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <synchDataGridScroll:CustomDataGrid Grid.Column="0" x:Name="DataGrid1" ItemsSource="{Binding Data1}" VerticalScrollBarVisibility="Disabled" VerticalScrollValue="{Binding ElementName=ScrollBar, Path=Value}"/>
+        <synchDataGridScroll:CustomDataGrid Grid.Column="1" x:Name="DataGrid2" ItemsSource="{Binding Data2}" VerticalScrollBarVisibility="Disabled" VerticalScrollValue="{Binding ElementName=ScrollBar, Path=Value}"/>
+        <ScrollBar x:Name="ScrollBar" Grid.Column="2">
+            <ScrollBar.ViewportSize>
+                <MultiBinding Converter="{StaticResource GetMaxValueConverter}">
+                    <Binding ElementName="DataGrid1" Path="ScrollViewer.ViewportHeight"/>
+                    <Binding ElementName="DataGrid2" Path="ScrollViewer.ViewportHeight"/>
+                </MultiBinding>
+            </ScrollBar.ViewportSize>
+            <ScrollBar.Maximum>
+                <MultiBinding Converter="{StaticResource GetMaxValueConverter}">
+                    <Binding ElementName="DataGrid1" Path="ScrollViewer.ScrollableHeight"/>
+                    <Binding ElementName="DataGrid2" Path="ScrollViewer.ScrollableHeight"/>
+                </MultiBinding>
+            </ScrollBar.Maximum>
+        </ScrollBar>
+    </Grid>
+</Window>
