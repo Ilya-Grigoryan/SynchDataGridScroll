@@ -8,7 +8,7 @@
 
         <ControlTemplate TargetType="{x:Type synchDataGridScroll:CustomDataGrid}" x:Key="CustomDataGridTemplate">
             <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
-                <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
+                <synchDataGridScroll:CustomScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
                     <ScrollViewer.Template>
                         <ControlTemplate TargetType="{x:Type ScrollViewer}">
                             <Grid>
@@ -37,7 +37,7 @@
                         </ControlTemplate>
                     </ScrollViewer.Template>
                     <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                </ScrollViewer>
+                </synchDataGridScroll:CustomScrollViewer>
             </Border>
         </ControlTemplate>
     </Window.Resources>
