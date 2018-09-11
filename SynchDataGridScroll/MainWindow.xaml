@@ -47,9 +47,21 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <synchDataGridScroll:CustomDataGrid Grid.Column="0" x:Name="DataGrid1" ItemsSource="{Binding Data1}" Template="{StaticResource CustomDataGridTemplate}" VerticalScrollBarVisibility="Disabled" VerticalScrollValue="{Binding ElementName=ScrollBar, Path=Value}"/>
-        <synchDataGridScroll:CustomDataGrid Grid.Column="1" x:Name="DataGrid2" ItemsSource="{Binding Data2}" Template="{StaticResource CustomDataGridTemplate}" VerticalScrollBarVisibility="Disabled" VerticalScrollValue="{Binding ElementName=ScrollBar, Path=Value}"/>
-        <ScrollBar x:Name="ScrollBar" Grid.Column="2">
+        <synchDataGridScroll:CustomDataGrid Grid.Column="0" x:Name="DataGrid1" ItemsSource="{Binding Data1}" ScrollViewer.CanContentScroll="True" Template="{StaticResource CustomDataGridTemplate}" VerticalScrollBarVisibility="Disabled" VerticalScrollValue="{Binding ElementName=ScrollBar, Path=Value}">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Height" Value="20"></Setter>
+                </Style>
+            </DataGrid.RowStyle>
+        </synchDataGridScroll:CustomDataGrid>
+        <synchDataGridScroll:CustomDataGrid Grid.Column="1" x:Name="DataGrid2" ItemsSource="{Binding Data2}" ScrollViewer.CanContentScroll="True" Template="{StaticResource CustomDataGridTemplate}" VerticalScrollBarVisibility="Disabled" VerticalScrollValue="{Binding ElementName=ScrollBar, Path=Value}">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Height" Value="40"></Setter>
+                </Style>
+            </DataGrid.RowStyle>
+        </synchDataGridScroll:CustomDataGrid>
+        <ScrollBar x:Name="ScrollBar" Grid.Column="2" SmallChange="1">
             <ScrollBar.ViewportSize>
                 <MultiBinding Converter="{StaticResource GetMaxValueConverter}">
                     <Binding ElementName="DataGrid1" Path="ScrollViewer.ViewportHeight"/>
