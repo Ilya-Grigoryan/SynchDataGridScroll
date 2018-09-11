@@ -73,7 +73,6 @@
                                             ItemsSource="{Binding Data2}"  
                                             Style="{StaticResource CustomDataGridStyle}" 
                                             RowStyle="{StaticResource SecondDataGridRowStyle}"/>
-
         <ScrollBar x:Name="ScrollBar" Grid.Column="2" SmallChange="1">
             <ScrollBar.ViewportSize>
                 <MultiBinding Converter="{StaticResource GetMaxValueConverter}">
