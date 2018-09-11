@@ -40,6 +40,22 @@
                 </synchDataGridScroll:CustomScrollViewer>
             </Border>
         </ControlTemplate>
+
+        <Style x:Key="CustomDataGridStyle" TargetType="{x:Type synchDataGridScroll:CustomDataGrid}" BasedOn="{StaticResource {x:Type DataGrid}}">
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="Template" Value="{StaticResource CustomDataGridTemplate}"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="VerticalScrollValue" Value="{Binding ElementName=ScrollBar, Path=Value}"/>
+        </Style>
+
+        <Style x:Key="FirstDataGridRowStyle" TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource {x:Type DataGridRow}}">
+            <Setter Property="Height" Value="20"/>
+        </Style>
+        
+        <Style x:Key="SecondDataGridRowStyle" TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource {x:Type DataGridRow}}">
+            <Setter Property="Height" Value="40"/>
+        </Style>
+        
     </Window.Resources>
     <Grid Name="Test" Background="White">
         <Grid.ColumnDefinitions>
@@ -47,9 +63,18 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <synchDataGridScroll:CustomDataGrid Grid.Column="0" x:Name="DataGrid1" ItemsSource="{Binding Data1}" Template="{StaticResource CustomDataGridTemplate}" VerticalScrollBarVisibility="Disabled" VerticalScrollValue="{Binding ElementName=ScrollBar, Path=Value}"/>
-        <synchDataGridScroll:CustomDataGrid Grid.Column="1" x:Name="DataGrid2" ItemsSource="{Binding Data2}" Template="{StaticResource CustomDataGridTemplate}" VerticalScrollBarVisibility="Disabled" VerticalScrollValue="{Binding ElementName=ScrollBar, Path=Value}"/>
-        <ScrollBar x:Name="ScrollBar" Grid.Column="2">
+        <synchDataGridScroll:CustomDataGrid Grid.Column="0" 
+                                            x:Name="DataGrid1" 
+                                            ItemsSource="{Binding Data1}" 
+                                            Style="{StaticResource CustomDataGridStyle}" 
+                                            RowStyle="{StaticResource FirstDataGridRowStyle}"/>
+        <synchDataGridScroll:CustomDataGrid Grid.Column="1" 
+                                            x:Name="DataGrid2" 
+                                            ItemsSource="{Binding Data2}"  
+                                            Style="{StaticResource CustomDataGridStyle}" 
+                                            RowStyle="{StaticResource SecondDataGridRowStyle}"/>
+
+        <ScrollBar x:Name="ScrollBar" Grid.Column="2" SmallChange="1">
             <ScrollBar.ViewportSize>
                 <MultiBinding Converter="{StaticResource GetMaxValueConverter}">
                     <Binding ElementName="DataGrid1" Path="ScrollViewer.ViewportHeight"/>
